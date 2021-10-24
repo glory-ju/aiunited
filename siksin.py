@@ -63,20 +63,20 @@ for s_id,link in zip(store_id, s_link):
     reviews = soup.select('#siksin_review > div.rList > ul > li > div > div.cnt > div.score_story > p')
     scores = soup.select('#siksin_review > div.rList > ul > li > div > div.cnt > div.score_story > div > span > strong')
     for idx,review in enumerate(reviews):
-        reviews[idx] = review.text.replace('\n',' ').replace('"','')
+        reviews[idx] = review.text.replace('\n',' ').replace('\r', '')
     for idx,score in enumerate(scores):
         scores[idx] = score.text
 
 
     for i in range(review_cnt):
-        store_review = store_review.append(pd.DataFrame([[s_id, 1003, scores[i], reviews[i]]], columns=review_columns))
+        store_review = store_review.append(pd.DataFrame([[s_id, 1001, scores[i], reviews[i]]], columns=review_columns))
 
 
 
     print(reviews)
     print(scores)
 
-store_review.to_csv('siksin_review.csv', encoding='utf-8', index=False)
+store_review.to_csv('siksin_review.csv', encoding='utf-8-sig', index=False)
 
 
 driver.quit()
