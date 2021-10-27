@@ -15,13 +15,14 @@ store_review = pd.DataFrame(columns=review_columns)
 s_link = df['s_link'].values.tolist()
 store_id = df['store_id'].values.tolist()
 
+
 headers = {
     'authority': 'api.siksinhot.com',
     'pragma': 'no-cache',
     'cache-control': 'no-cache',
     'sec-ch-ua': '"Google Chrome";v="95", "Chromium";v="95", ";Not A Brand";v="99"',
     'accept': 'application/json, text/plain, */*',
-    'siksinoauth': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjAsImlhdCI6MTYzNTEzOTY5OSwiZXhwIjoxNjM1MjI2MDk5LCJpc3MiOiJzaWtzaW4ifQ.-GisvUC2SYTH37231E0Qg0QpBDvwcsvdKWWcLY7v90k',
+    'siksinoauth': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjAsImlhdCI6MTYzNTMyMzUxNywiZXhwIjoxNjM1NDA5OTE3LCJpc3MiOiJzaWtzaW4ifQ.dM9DWdvOG3K-cvlwzdxBV_TJwAYjSvW02UhgHgkxaqY',
     'sec-ch-ua-mobile': '?0',
     'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36',
     'sec-ch-ua-platform': '"Windows"',
@@ -69,6 +70,5 @@ for s_id,link in zip(store_id, s_link):
             store_review = store_review.append(pd.DataFrame([[int(s_id), int(1001), datetime.datetime.fromtimestamp(timestamp/1000),
                                                              scr, storyContent]], columns=review_columns))
 
-store_review.to_csv('siksin_review.csv', encoding='utf-8-sig', index=False)
-
+store_review.to_csv('siksin_review2.csv', encoding='utf-8-sig', index=False)
 
