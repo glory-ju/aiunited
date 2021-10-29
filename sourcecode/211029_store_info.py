@@ -12,6 +12,21 @@ def store_info(idx):
     print(store, store_x, store_y, store_addr, store_addr_new, store_tel, open_hours, n_link, website, sep='\n')
     print()
 
+def to_csv(i, idx):
+    store = load['result']['place']['list'][idx]['name']
+    store_x = load['result']['place']['list'][idx]['x']
+    store_y = load['result']['place']['list'][idx]['y']
+    store_addr = load['result']['place']['list'][idx]['address']
+    store_addr_new = load['result']['place']['list'][idx]['roadAddress']
+    store_tel = load['result']['place']['list'][idx]['tel']
+    open_hours = load['result']['place']['list'][idx]['bizhourInfo']
+    n_link = load['result']['place']['list'][idx]['id']
+    website = 'https://map.naver.com/v5/search/' + web_name + '/place/' + str(n_link)
+
+    data_frame.append([i+1, df['store_addr'][i][:2], store, store_x, store_y, store_addr, store_addr_new, store_tel, open_hours, n_link, website])
+    dataset = pd.DataFrame(data_frame, columns=['store_id', 'region', 'store_name', 'store_x', 'store_y', 'store_addr', 'store_addr_new', 'store_tel', 'open_hours', 'n_link', 'website'])
+    dataset.to_csv('C:/Users/quzmi/PycharmProjects/aiunited/data/naver_store_info1.csv', encoding='utf-8-sig', index=False)
+
 import requests
 import json
 import pandas as pd
@@ -24,7 +39,7 @@ num_100 = -10
 
 data_frame = []
 
-for i in range(len(df)):
+for i in range(100):
     time.sleep(1)
     df['new_name'] = df['store_name'][i] + ' ' + df['store_addr'][i][:12]
     new_name = df['new_name'][i]
@@ -50,15 +65,19 @@ for i in range(len(df)):
 
                     if store_addr == csv_addr:
                         store_info(idx)
+                        to_csv(i, idx)
                         break
                     elif store_addr[:15] == csv_addr[:15]:
                         store_info(idx)
+                        to_csv(i, idx)
                         break
                     elif store_addr[:7] == csv_addr[:7]:
                         store_info(idx)
+                        to_csv(i, idx)
                         break
                     elif store_addr[:10] == csv_addr[:10]:
                         store_info(idx)
+                        to_csv(i, idx)
                         break
 
             except:
@@ -71,6 +90,7 @@ for i in range(len(df)):
                 response = requests.get('https://map.naver.com/v5/api/search', headers=headers, params=params)
                 load = json.loads(response.text)
                 store_info(idx)
+                to_csv(i, idx)
 
         except:
             new_name = df['store_name'][i][:8]
@@ -90,9 +110,11 @@ for i in range(len(df)):
 
                 if store_addr == csv_addr:
                     store_info(idx)
+                    to_csv(i, idx)
                     break
                 elif store_addr[:15] == csv_addr[:15]:
                     store_info(idx)
+                    to_csv(i, idx)
                     break
     except:
-        print('NoInfo')
+        data_frame.append('NoInfo')
