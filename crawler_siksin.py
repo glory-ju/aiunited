@@ -13,6 +13,7 @@ def get_review(df):
     review_columns = ['store_id', 'portal_id', 'date', 'score', 'review']
     store_review = pd.DataFrame(columns=review_columns)
     df = df.astype({'s_link': 'str'})
+    df = df.astype({'store_id':'int'})
     s_link = df['s_link'].values.tolist()
     store_id = df['store_id'].values.tolist()
 
@@ -25,7 +26,7 @@ def get_review(df):
 
         res = req.get(url, headers=headers)
         res_text = res.text
-        total_review = int(res_text.split('"cnt":')[1].split(',')[0])
+        total_review = json.loads(res_text)['data']['cnt']
 
         if total_review == 0:
             pass
@@ -49,7 +50,7 @@ def get_review(df):
                 scr = review['score']
                 date_time = datetime.datetime.fromtimestamp(timestamp/1000).date()
 
-                store_review = store_review.append(pd.DataFrame([[int(s_id), 1001, date_time,
+                store_review = store_review.append(pd.DataFrame([[s_id, 1001, date_time,
                                                                  scr, storyContent]], columns=review_columns))
 
     return store_review
@@ -57,7 +58,8 @@ def get_review(df):
 
 
 def get_info(df):
-    df = df.astype({'s_link': 'str'})
+    df = df.astype({'s_link':'str'})
+    df = df.astype({'store_id':'int'})
     s_link = df['s_link'].values.tolist()
     store_id = df['store_id'].values.tolist()
     store_name = df['store_name'].values.tolist()
@@ -99,7 +101,7 @@ def get_info(df):
             opn_hrs = ''
 
         store_info = store_info.append(
-            pd.DataFrame([[int(s_id), region, name, lat, lng, addr, addr2, phone, opn_hrs, homepage, link]],
+            pd.DataFrame([[s_id, region, name, lat, lng, addr, addr2, phone, opn_hrs, homepage, link]],
                          columns=info_columns))
     return store_info
 
