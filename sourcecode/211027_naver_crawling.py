@@ -1,6 +1,7 @@
 import requests
 import pandas as pd
 import json
+import time
 
 df = pd.read_csv('C:/Users/quzmi/PycharmProjects/aiunited/data/store_info.csv', encoding='euc-kr')
 id_list = []
@@ -33,7 +34,6 @@ for idx in range(len(df['key_words'])):
         ('caller', 'pcweb'),
         ('query', df['key_words'][idx]),
         ('type', 'all'),
-        ('searchCoord', '127.10516880000041;38.023804000000084'),
         ('page', '1'),
         ('displayCount', '20'),
         ('isPlaceRecommendationReplace', 'true'),
@@ -53,8 +53,6 @@ for idx in range(len(df['key_words'])):
         id_list.append('None')
 
     print(id_list)
-    print()
-    print()
 
     headers = {
         'authority': 'pcmap-api.place.naver.com',
@@ -90,7 +88,7 @@ for idx in range(len(df['key_words'])):
     else:
         display = str(100)
     try:
-        for page in range(iter_cnt):
+        for page in range(1, iter_cnt):
             data = '[{"operationName":"getVisitorReviews","variables":{"input":{"businessId":"' + businessid + '","businessType":"restaurant","item":"0","bookingBusinessId":null,"page":' + str(page) + ',"display":'+ display +',"isPhotoUsed":false,"includeContent":true,"getAuthorInfo":true},"id":"12024487"},"query":"query getVisitorReviews($input: VisitorReviewsInput) {\\n  visitorReviews(input: $input) {\\n    items {\\n      id\\n      rating\\n      author {\\n        id\\n        nickname\\n        from\\n        imageUrl\\n        objectId\\n        url\\n        review {\\n          totalCount\\n          imageCount\\n          avgRating\\n          __typename\\n        }\\n        theme {\\n          totalCount\\n          __typename\\n        }\\n        __typename\\n      }\\n      body\\n      thumbnail\\n      media {\\n        type\\n        thumbnail\\n        __typename\\n      }\\n      tags\\n      status\\n      visitCount\\n      viewCount\\n      visited\\n      created\\n      reply {\\n        editUrl\\n        body\\n        editedBy\\n        created\\n        replyTitle\\n        __typename\\n      }\\n      originType\\n      item {\\n        name\\n        code\\n        options\\n        __typename\\n      }\\n      language\\n      highlightOffsets\\n      apolloCacheId\\n      translatedText\\n      businessName\\n      showBookingItemName\\n      showBookingItemOptions\\n      bookingItemName\\n      bookingItemOptions\\n      votedKeywords {\\n        code\\n        displayName\\n        __typename\\n      }\\n      userIdno\\n      isFollowing\\n      followerCount\\n      followRequested\\n      loginIdno\\n      __typename\\n    }\\n    starDistribution {\\n      score\\n      count\\n      __typename\\n    }\\n    hideProductSelectBox\\n    total\\n    __typename\\n  }\\n}\\n"}]'
             response = requests.post('https://pcmap-api.place.naver.com/graphql', headers=headers, data=data)
             response_json = json.loads(response.text)
@@ -98,74 +96,22 @@ for idx in range(len(df['key_words'])):
             print(total_review)
 
             for index, i in enumerate(response_json):
-                # date = i['created']
-                # score = i['rating']
-                # review = i['body'].replace('\n','')
-                # data_frame.append([idx+1, 1004, date, score, review])
+                date = i['created']
+                score = i['rating']
+                review = i['body'].replace('\n','')
+                data_frame.append([idx+1, 1004, date, score, review])
+
                 print(index, i['visited'])
                 print(i['rating'])
                 print(i['body'].replace('\n', ''))
 
-
-            # try:
-            #
-            #     for i in range(total_review):
-            #         store_id_list = idx+1
-            #         portal_id = 1004
-            #         date_list = response_json[0]['data']['visitorReviews']['items'][i]['created']
-            #         score_list = response_json[0]['data']['visitorReviews']['items'][i]['rating']
-            #         review_list = response_json[0]['data']['visitorReviews']['items'][i]['body'].replace('\n', '')
-            #
-            #         data_frame.append([store_id_list, portal_id, date_list, score_list, review_list])
-            #
-            #         print(date_list)
-            #         print(score_list)
-            #         print(review_list)
-            #
-            # except:
-            #     print('noreview')
-
-        # for i in range(page):
-        #     if businessid == 'None':
-        #         pass
-        #     else:
-        #         # data_sliced = data.replace(data[74:82], f'{businessid}').replace(data[155:156], f'{i+1}')
-        #         data_sliced = data.replace(data[74:82], f'{businessid}')
-        #         # print(data_sliced)
-        #
-        #         response = requests.post('https://pcmap-api.place.naver.com/graphql', headers=headers, data=data_sliced)
-        #         # print(response.text)
-        #         slicing = json.loads(response.text)
-        #         # print(slicing)
-        #         total_review = slicing[0]['data']['visitorReviews']['total']
-        #
-        #         # data2 = json.loads(data)
-        #         # data2[0]['variables']['input']['display'] = total_review
-        #         # print(response.text)
-        #         # print(total_review)
-        #
-        #
-        #         try:
-        #
-        #             for i in range(total_review):
-        #                 store_id_list = idx+1
-        #                 portal_id = 1004
-        #                 date_list = slicing[0]['data']['visitorReviews']['items'][i]['created']
-        #                 score_list = slicing[0]['data']['visitorReviews']['items'][i]['rating']
-        #                 review_list = slicing[0]['data']['visitorReviews']['items'][i]['body'].replace('\n', '')
-        #
-        #                 data_frame.append([store_id_list, portal_id, date_list, score_list, review_list])
-        #
-        #                 print(date_list)
-        #                 print(score_list)
-        #                 print(review_list)
-        #
-        #         except:
-        #             print('noreview')
-
     except:
         if businessid == 'None':
+            data_frame.append('NoInfo')
             pass
+
+    time.sleep(2)
+
 dataset = pd.DataFrame(data_frame, columns=['store_id','portal_id','date','score','review'])
 dataset.to_csv('naver_crawling.csv', encoding='utf-8-sig', index=False)
 
