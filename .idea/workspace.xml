@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="83426d46-65d4-4a78-963d-8a66d35467bb" name="Default Changelist" comment="2021-10-29 naver crawling top 100">
+    <list default="true" id="83426d46-65d4-4a78-963d-8a66d35467bb" name="Default Changelist" comment="2021-10-30 naver crawling top 100">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/storeInfo_1.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/~$store_info.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sourcecode/211029_store_info.py" beforeDir="false" afterPath="$PROJECT_DIR$/sourcecode/211029_store_info.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sourcecode/1030.py" beforeDir="false" afterPath="$PROJECT_DIR$/sourcecode/1101_naver_store_crawling.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sourcecode/naver_crawling.csv" beforeDir="false" afterPath="$PROJECT_DIR$/sourcecode/naver_crawling.csv" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,7 +38,12 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="settings.editor.selected.configurable" value="configurable.group.build" />
   </component>
-  <component name="RunManager" selected="Python.연습할거야 이걸로">
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\quzmi\PycharmProjects\aiunited\sourcecode" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.1101_naver_store_crawling">
     <configuration name="연습할거야 이걸로" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -62,7 +66,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="1030" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="1101_naver_store_crawling" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -75,7 +79,29 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/sourcecode/1030.py" />
+      <option name="SCRIPT_NAME" value="C:\Users\quzmi\PycharmProjects\aiunited\sourcecode\1101_naver_store_crawling.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="혹시몰라무서웡삭제하지마" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\quzmi\miniconda3\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/sourcecode" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="C:\Users\quzmi\PycharmProjects\aiunited\sourcecode\혹시몰라무서웡삭제하지마.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -128,42 +154,20 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="memo" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="C:\Users\quzmi\miniconda3\python.exe" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/sourcecode" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/sourcecode/memo.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <list>
-      <item itemvalue="Python.memo" />
       <item itemvalue="Python.211029_review_info" />
       <item itemvalue="Python.211029_store_info (1)" />
-      <item itemvalue="Python.1030" />
       <item itemvalue="Python.연습할거야 이걸로" />
+      <item itemvalue="Python.혹시몰라무서웡삭제하지마" />
+      <item itemvalue="Python.1101_naver_store_crawling" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.연습할거야 이걸로" />
-        <item itemvalue="Python.1030" />
-        <item itemvalue="Python.memo" />
-        <item itemvalue="Python.211029_store_info (1)" />
+        <item itemvalue="Python.1101_naver_store_crawling" />
         <item itemvalue="Python.211029_review_info" />
+        <item itemvalue="Python.연습할거야 이걸로" />
+        <item itemvalue="Python.혹시몰라무서웡삭제하지마" />
+        <item itemvalue="Python.211029_store_info (1)" />
       </list>
     </recent_temporary>
   </component>
@@ -176,6 +180,7 @@
       <option name="presentableId" value="Default" />
       <updated>1634892288995</updated>
       <workItem from="1634892307276" duration="1771000" />
+      <workItem from="1635680628564" duration="13648000" />
     </task>
     <task id="LOCAL-00001" summary="~$store_info.csv bye">
       <created>1635341731526</created>
@@ -212,7 +217,14 @@
       <option name="project" value="LOCAL" />
       <updated>1635525711464</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="2021-10-30 naver crawling top 100">
+      <created>1635583130502</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1635583130502</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -236,20 +248,21 @@
     <MESSAGE value="~$store_info.csv bye" />
     <MESSAGE value="2021-10-29 naver crawling" />
     <MESSAGE value="2021-10-29 naver crawling top 100" />
-    <option name="LAST_COMMIT_MESSAGE" value="2021-10-29 naver crawling top 100" />
+    <MESSAGE value="2021-10-30 naver crawling top 100" />
+    <option name="LAST_COMMIT_MESSAGE" value="2021-10-30 naver crawling top 100" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/aiunited$211029_store_info__1_.coverage" NAME="211029_store_info (1) Coverage Results" MODIFIED="1635528269252" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/sourcecode" />
     <SUITE FILE_PATH="coverage/aiunited$naver_scraping.coverage" NAME="naver_scraping Coverage Results" MODIFIED="1635352256224" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$USER_HOME$/Documents/카카오톡 받은 파일" />
-    <SUITE FILE_PATH="coverage/aiunited$1030.coverage" NAME="1030 Coverage Results" MODIFIED="1635582205086" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/sourcecode" />
+    <SUITE FILE_PATH="coverage/aiunited$1030.coverage" NAME="1030 Coverage Results" MODIFIED="1635709232107" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/sourcecode" />
     <SUITE FILE_PATH="coverage/aiunited$211027_naver_crawling.coverage" NAME="211027_naver_crawling Coverage Results" MODIFIED="1635400103435" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/sourcecode" />
     <SUITE FILE_PATH="coverage/aiunited$211025_naver.coverage" NAME="211025_naver Coverage Results" MODIFIED="1635336780572" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/sourcecode" />
     <SUITE FILE_PATH="coverage/aiunited$memo.coverage" NAME="memo Coverage Results" MODIFIED="1635580990721" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/sourcecode" />
-    <SUITE FILE_PATH="coverage/aiunited$_.coverage" NAME="연습할거야 이걸로 Coverage Results" MODIFIED="1635582798194" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/sourcecode" />
+    <SUITE FILE_PATH="coverage/aiunited$_.coverage" NAME="연습할거야 이걸로 Coverage Results" MODIFIED="1635682023502" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/sourcecode" />
     <SUITE FILE_PATH="coverage/aiunited$211028_store_info.coverage" NAME="211029_store_info Coverage Results" MODIFIED="1635527226981" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/sourcecode" />
     <SUITE FILE_PATH="coverage/aiunited$211028.coverage" NAME="211028 Coverage Results" MODIFIED="1635353581897" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/sourcecode" />
     <SUITE FILE_PATH="coverage/aiunited$28_practice.coverage" NAME="28_practice Coverage Results" MODIFIED="1635407502497" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/sourcecode" />
     <SUITE FILE_PATH="coverage/aiunited$211028_store_info__1_.coverage" NAME="211028_store_info (1) Coverage Results" MODIFIED="1635426320217" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/sourcecode" />
-    <SUITE FILE_PATH="coverage/aiunited$211029_review_info.coverage" NAME="211029_review_info Coverage Results" MODIFIED="1635527498822" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/sourcecode" />
+    <SUITE FILE_PATH="coverage/aiunited$211029_review_info.coverage" NAME="211029_review_info Coverage Results" MODIFIED="1635687985876" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/sourcecode" />
   </component>
 </project>
