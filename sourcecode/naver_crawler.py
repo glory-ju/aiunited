@@ -1,47 +1,28 @@
-import numpy as np
-
-
-def store_info(idx):
-    store = load['result']['place']['list'][idx]['name']
-    store_x = load['result']['place']['list'][idx]['x']
-    store_y = load['result']['place']['list'][idx]['y']
-    store_addr = load['result']['place']['list'][idx]['address']
-    store_addr_new = load['result']['place']['list'][idx]['roadAddress']
-    store_tel = load['result']['place']['list'][idx]['tel']
-    open_hours = load['result']['place']['list'][idx]['bizhourInfo']
-    n_link = load['result']['place']['list'][idx]['id']
-    website = load['result']['place']['list'][idx]['homePage']
-
-    print(i+1, store, store_x, store_y, store_addr, store_addr_new, store_tel, open_hours, n_link, website, sep='\n')
-    print()
-
+# try / except 구문에 쓰일 공통 인자들 함수 생성
 def to_csv(i, idx):
-    store = load['result']['place']['list'][idx]['name']
-    store_x = load['result']['place']['list'][idx]['x']
-    store_y = load['result']['place']['list'][idx]['y']
-    store_addr = load['result']['place']['list'][idx]['address']
-    store_addr_new = load['result']['place']['list'][idx]['roadAddress']
-    store_tel = load['result']['place']['list'][idx]['tel']
-    open_hours = load['result']['place']['list'][idx]['bizhourInfo']
-    n_link = load['result']['place']['list'][idx]['id']
-    website = load['result']['place']['list'][idx]['homePage']
+    info_idx = load['result']['place']['list'][idx]
+
+    store = info_idx['name']
+    store_x = info_idx['x']
+    store_y = info_idx['y']
+    store_addr = info_idx['address']
+    store_addr_new = info_idx['roadAddress']
+    store_tel = info_idx['tel']
+    open_hours = info_idx['bizhourInfo']
+    n_link = info_idx['id']
+    website = info_idx['homePage']
 
     data_frame.append([i+22543, df['store_addr'][i][:2], store, store_x, store_y, store_addr, store_addr_new, store_tel, open_hours, n_link, website])
     dataset = pd.DataFrame(data_frame, columns=['store_id', 'region', 'store_name', 'store_x', 'store_y', 'store_addr', 'store_addr_new', 'store_tel', 'open_hours', 'n_link', 'website'])
     dataset.to_csv('naver_storeInfo.csv', encoding='UTF-8', index=False)
 
-
-
 import requests
 import json
 import pandas as pd
 import time
-import random
+import numpy as np
 
 df = pd.read_csv('storeInfo_1.csv')
-
-count = int(len(df) / 100) + 2
-num_100 = -100
 
 data_frame = []
 
@@ -66,28 +47,29 @@ for i in range(len(df)):
     try:
         try:
             try:
+                # storeInfo_1.csv 상의 주소가 siksin에서 크롤링한 주소임
+                # 네이버, 구글상 주소와 다른 곳이 많음
+                # 따라서 '경기도 연천군 연천읍' 까지 1차 슬라이싱
+
                 csv_addr = df['store_addr'][i][:12]
 
                 for idx in range(len(load['result']['place']['list'])):
                     store_addr = load['result']['place']['list'][idx]['address'][:12]
 
                     if store_addr == csv_addr:
-                        store_info(idx)
                         to_csv(i, idx)
                         break
+                    # 주소가 가지각색이라 조건문 추가
                     elif store_addr[:15] == csv_addr[:15]:
-                        store_info(idx)
                         to_csv(i, idx)
                         break
                     elif store_addr[:7] == csv_addr[:7]:
-                        store_info(idx)
                         to_csv(i, idx)
                         break
                     elif store_addr[:10] == csv_addr[:10]:
-                        store_info(idx)
                         to_csv(i, idx)
                         break
-
+            # 식당 이름 + 주소 전체로 입력값
             except:
                 new_name = df['store_name'][i] + ' ' + df['store_addr'][i]
                 params = (
@@ -97,9 +79,8 @@ for i in range(len(df)):
                 )
                 response = requests.get('https://map.naver.com/v5/api/search', headers=headers, params=params)
                 load = json.loads(response.text)
-                store_info(idx)
                 to_csv(i, idx)
-
+        # 송학원한방삼계탕누룽지백숙 -> 송하원 누룽지 한방 백숙을 위한 except
         except:
             new_name = df['store_name'][i][:8]
             params = (
@@ -118,11 +99,9 @@ for i in range(len(df)):
 
 
                 if store_addr == csv_addr:
-                    store_info(idx)
                     to_csv(i, idx)
                     break
                 elif store_addr[:15] == csv_addr[:15]:
-                    store_info(idx)
                     to_csv(i, idx)
                     break
     except:
