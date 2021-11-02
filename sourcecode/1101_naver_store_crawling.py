@@ -28,7 +28,7 @@ def to_csv(i, idx):
 
     data_frame.append([i+22543, df['store_addr'][i][:2], store, store_x, store_y, store_addr, store_addr_new, store_tel, open_hours, n_link, website])
     dataset = pd.DataFrame(data_frame, columns=['store_id', 'region', 'store_name', 'store_x', 'store_y', 'store_addr', 'store_addr_new', 'store_tel', 'open_hours', 'n_link', 'website'])
-    dataset.to_csv('naver_store_info_time.csv', encoding='UTF-8', index=False)
+    dataset.to_csv('naver_storeInfo.csv', encoding='UTF-8', index=False)
 
 
 
@@ -46,7 +46,7 @@ num_100 = -100
 data_frame = []
 
 for i in range(len(df)):
-    time.sleep(np.random.randint(0, 4))
+    time.sleep(np.random.randint(0, 2))
     df['new_name'] = df['store_name'][i] + ' ' + df['store_addr'][i][:12]
     new_name = df['new_name'][i]
 
