@@ -65,3 +65,4 @@ staticfiles/
 gis_5.pem
 nginx.conf
 Dockerfile
+kss/
