@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="83426d46-65d4-4a78-963d-8a66d35467bb" name="Default Changelist" comment="2021-11-02 naver crawling">
+    <list default="true" id="83426d46-65d4-4a78-963d-8a66d35467bb" name="Default Changelist" comment="2021-11-04 naver crawling">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sourcecode/naver_crawler.py" beforeDir="false" afterPath="$PROJECT_DIR$/sourcecode/naver_crawler.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sourcecode/naver_crawling.csv" beforeDir="false" afterPath="$PROJECT_DIR$/sourcecode/naver_crawling.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sourcecode/review_crawler.py" beforeDir="false" afterPath="$PROJECT_DIR$/sourcecode/review_crawler.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sourcecode/naver_crawling.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sourcecode/naver_crawling.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sourcecode/naver_store_info0.csv" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,6 +18,9 @@
         <option value="Python Script" />
       </list>
     </option>
+  </component>
+  <component name="Git.Merge.Settings">
+    <option name="BRANCH" value="origin/master" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
@@ -228,7 +231,7 @@
       <option name="presentableId" value="Default" />
       <updated>1634892288995</updated>
       <workItem from="1634892307276" duration="1771000" />
-      <workItem from="1635680628564" duration="83303000" />
+      <workItem from="1635680628564" duration="83985000" />
     </task>
     <task id="LOCAL-00001" summary="~$store_info.csv bye">
       <created>1635341731526</created>
@@ -293,7 +296,14 @@
       <option name="project" value="LOCAL" />
       <updated>1635838609342</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="2021-11-04 naver crawling">
+      <created>1635957222392</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1635957222392</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -321,7 +331,8 @@
     <MESSAGE value="2021-11-01 naver crawling" />
     <MESSAGE value="2021-11-02 naver crawling Store Information" />
     <MESSAGE value="2021-11-02 naver crawling" />
-    <option name="LAST_COMMIT_MESSAGE" value="2021-11-02 naver crawling" />
+    <MESSAGE value="2021-11-04 naver crawling" />
+    <option name="LAST_COMMIT_MESSAGE" value="2021-11-04 naver crawling" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/aiunited$211025_naver.coverage" NAME="211025_naver Coverage Results" MODIFIED="1635336780572" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/sourcecode" />
