@@ -93,9 +93,21 @@ def get_info(df):
         phone = info_json['phone']
         homepage = info_json['homepage']
         try:
-            var2 = re.compile('영업시간.*?</label>')
+            var2 = re.compile('{"oprtCode":.*?}')
             open_hours = var2.search(res_text).group()
-            opn_hrs = open_hours[-21:-8]
+            opn_hrs_json = json.loads(open_hours)
+            weekbit = opn_hrs_json['weekBit']
+
+            week = '월화수목금토일'
+            for idx, i in enumerate(weekbit):
+                if i == '0':
+                    week = week.replace(week[idx], ' ')
+                elif i == '1':
+                    continue
+            week = week.replace(' ', '')
+
+            opn_hrs = week + ' ' + opn_hrs_json['startTm'] + ' ' + opn_hrs_json['endTm']
+            print(opn_hrs)
 
         except:
             opn_hrs = ''
