@@ -2,7 +2,20 @@ import requests
 import datetime
 from bs4 import BeautifulSoup as bs
 import pandas as pd
+import utils.str_func as str_func
 
+'''
+    @ Author : seunghyo
+    @ method : 리부 데이터 크롤링
+    @ parameter : 
+        1. store_id = 음식점 id
+        2. store_code = diningcode 음식점 고유 code
+        3. df = 리뷰 데이터 프레임 
+    @ info 
+        1. 매개변수로 전달된 store_code로 리뷰 api 요청
+        2. 리뷰, 평점, 작성일자 추가해서 데이터프레임에 저장
+        3. 저장된 데이터프레임 리턴
+'''
 def get_review(store_id, store_code, df):
     column_list = ['store_id', 'portal_id', 'date', 'score', 'review']
     page = 0
@@ -57,8 +70,12 @@ def get_review(store_id, store_code, df):
                 date = str(dt_now.year) + '년 ' + date
 
             # 리뷰
-            review = review.select_one('p.review_contents.btxt').text
-
+            try:
+                review = review.select_one('p.review_contents.btxt').text
+            except:
+                review = ''
+            # date format
+            date = str_func.dateFormat(date)
             # # 데이터프레임에 추가해주기
             review_df_row = pd.DataFrame([[store_id, 1003, date, star_score, review]], columns=column_list)
             df = df.append(review_df_row)
