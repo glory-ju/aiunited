@@ -12,7 +12,7 @@ driver = webdriver.Chrome('/Users/imseunghyo/dev/chromedriver')
 context = ssl._create_unverified_context()
 
 # csv 파일 데이터프레임화
-df = pd.read_csv('data/store_info.csv', encoding='UTF-8')
+df = pd.read_csv('../../data/store_info.csv', encoding='UTF-8')
 
 # base url
 base_url = 'https://www.diningcode.com/profile.php?rid='
