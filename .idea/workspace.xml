@@ -201,8 +201,9 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Python.211029_review_info" />
       <item itemvalue="Python.연습할거야 이걸로" />
+      <item itemvalue="Python.1101_naver_store_crawling" />
+      <item itemvalue="Python.211029_review_info" />
       <item itemvalue="Python.gpu" />
       <item itemvalue="Python.naver_crawler" />
       <item itemvalue="Python.review_crawler" />

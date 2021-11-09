@@ -16,8 +16,10 @@ for idx in range(len(df)):
         checked_sent = spelled_sent.checked
         space = spacing(checked_sent)
         hangeul = only_hangle(space)
+
         if '구성비' in hangeul:
             hangeul = hangeul.replace('구성비','가성비')
+
         print(hangeul)
         dataframe.append(hangeul)
     except:
@@ -25,4 +27,5 @@ for idx in range(len(df)):
 preprocessed = pd.DataFrame(dataframe)
 df['preprocessed_reivew'] = preprocessed
 print(df)
+
 df.to_csv('naver_preprocessing_review.csv', encoding='utf-8', index=False)
