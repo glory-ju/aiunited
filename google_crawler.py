@@ -1,104 +1,115 @@
-"""
-coding : utf-8
-author : jihnkim
-
-*-- Google Maps Crawler --*
-
-"""
-# import modules
-import csv
-import time
 import pandas as pd
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.common.action_chains import ActionChains
-from Bs4Utils import StaticCrawler
+import requests
+import re
+import json
+import time
+import numpy as np
+from tqdm import tqdm
 
-# preprocessing
-df = pd.read_csv('store_info.csv', sep=',', encoding='utf-8')
+# 구글 맵스에서 F12, 네트워크에서 해당 음식점 검색 후 curl 카피후 python 변환
 
-df = df[['store_id', 'region', 'store_name', 'store_addr', 'store_addr_new']]
+df = pd.read_csv('storeInfo_1.csv', sep=',', encoding='utf-8')
+df = df.iloc[0:100, :]
 
 df['key_words'] = df['store_addr'] + ' ' + df['store_name']
 
-# crawl with selenium webdriver for dynamic crawling
-service = Service('C:/Users/sysan/PycharmProjects/aiunited/ex_crawldata/chromedriver.exe')
-driver = webdriver.Chrome(service= service)
+review_dataset = []
+store_info_dataset = []
 
-data = []
+for n, keyword in tqdm(enumerate(df['key_words'].tolist())):
+    headers = {
+        'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36',
+    }
 
-for i, keyword in enumerate(df['key_words'].tolist()):
-    print(i)
-    print(keyword, end=" ")
+    params = (
+        ('hl', 'ko'),
+    )
+
+    store_id = df.loc[n]['store_id']
+    first_query = ''
+    second_query = ''
+    review_cnt = 0
+
+    website = ''
+    g_link = f'https://www.google.com/maps/search/{keyword}'
+
+    print(f'store_id : {store_id}')
+    # print(keyword, end=" ")
+
+    response = requests.get(f'https://www.google.com/maps/search/{keyword}', headers=headers, params=params)
+    res_text = response.text
+
+    # 정규표현식 작성 및 store pb값 추출
+    var = re.compile('window.APP_INITIALIZATION_STATE.*?;window')
+    var = var.search(res_text).group().replace('\\"', '').replace('[', '').replace(']', '').split(',')
 
     try:
-        search_url = f'https://www.google.com/maps/search/{keyword}'
-        driver.get(search_url)
-        driver.implicitly_wait(5)
+        for idx, item in enumerate(var):
+            if item[:3] == '리뷰 ':
+                review_cnt = var[idx]
+                review_cnt = review_cnt.replace('리뷰 ', '').replace('개', '')
 
-        review_btn = driver.find_element(By.CSS_SELECTOR,
-                                         "#pane > div > div.widget-pane-content.cYB2Ge-oHo7ed > div > div > div.x3AX1-LfntMc-header-title > div.x3AX1-LfntMc-header-title-ma6Yeb-haAclf > div.x3AX1-LfntMc-header-title-ij8cu > div.x3AX1-LfntMc-header-title-ij8cu-haAclf > div > div.gm2-body-2.h0ySl-wcwwM-RWgCYc > span:nth-child(3) > span > span:nth-child(1) > span.OAO0-ZEhYpd-vJ7A6b.OAO0-ZEhYpd-vJ7A6b-qnnXGd > span:nth-child(1) > button")
-        review_btn.click()
-        time.sleep(3)
+                if var[idx + 1] != 'null':
+                    review_cnt = var[idx] + var[idx + 1]
+                    review_cnt = review_cnt.replace('리뷰 ', '').replace('개', '')
 
-        # infinite scroll ** 수정필요(스크롤 다운은 안되고.. action으로는 페이지가 안넘어감)
-        # for n in range(1, 10000):
-        #     n += 29
-        #     element = driver.find_element(By.XPATH,
-        #                                   f'//*[@id="pane"]/div/div[1]/div/div/div[2]/div[9]/div[30]')
-        #     actions = ActionChains(driver).move_to_element(element)
-        #     actions.perform()
-        #     time.sleep(3)
+            if item[:3] == '385':
+                first_query = var[idx]
+                second_query = var[idx + 1]
+                break
 
+    except:
+        print('No result')
+        continue
+
+    # print(first_query, second_query, review_cnt, website, g_link)
+    store_info_dataset.append([store_id, website, g_link])
+
+
+    headers = {
+        'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36',
+        }
+
+    for num in range(0, int(review_cnt), 10):
         try:
-            for j in range(1, 10000):
-                # user id
-                idx = (3 * j) - 2 # what's idx mean? XPath에서 특정 디비젼 인덱스가 공차가 3인 등차수열임
-                user_id = driver.find_element(By.XPATH,
-                                              f'//*[@id="pane"]/div/div[1]/div/div/div[2]/div[9]/div[{idx}]/div/div[3]/div[2]/div/div/a/div[1]/span').text
-                if user_id == None:
-                    user_id = driver.find_element(By.XPATH,
-                                                  f'//*[@id="pane"]/div/div[1]/div/div/div[2]/div[8]/div[{idx}]/div/div[3]/div[2]/div/div/a/div[1]/span').text
-                    # review text
-                    review_txt = driver.find_element(By.XPATH,
-                                                     f'//*[@id="pane"]/div/div[1]/div/div/div[2]/div[8]/div[{idx}]/div/div[3]/div[3]/div[2]/span[2]').text
+            params = (
+                ('authuser', '0'),
+                ('hl', 'ko'),
+                ('gl', 'kr'),
+                ('pb',
+                 f'!1m2!1y{first_query}!2y{second_query}!2m2!1i{num}!2i10!3e2!4m5!3b1!4b1!5b1!6b1!7b1!5m2!1sZ012YdKFJuW4mAWWz67ICg!7e81'))
 
-                    # rate
-                    star_score = driver.find_element(By.XPATH,
-                                                     f'//*[@id="pane"]/div/div[1]/div/div/div[2]/div[8]/div[{idx}]/div/div[3]/div[3]/div[1]/span[2]')
-                    star_score = star_score.get_attribute('aria-label')  # 구글 별점은 text 형식이 아니여서 속성값을 불러옴
+            response = requests.get('https://www.google.com/maps/preview/review/listentitiesreviews', headers=headers,
+                                    params=params)
+            res_text = response.text
+            res_text = res_text.replace(")]}'", "")
 
-                    # save as list
-                    data.append([i + 1, 1002, user_id, review_txt, int(star_score[4])])
+            # json으로 load
+            info_json = json.loads(res_text)
 
+            for i in info_json[2]:
+                portal_id = 1002
+                review_text = i[3]
+                score = i[4]
+                date = pd.to_datetime(f'{i[27]}', unit='ms')
+
+                if review_text == None:
+                    continue
                 else:
-                    # review text
-                    review_txt = driver.find_element(By.XPATH,
-                                                     f'//*[@id="pane"]/div/div[1]/div/div/div[2]/div[9]/div[{idx}]/div/div[3]/div[3]/div[2]/span[2]').text
+                    review_dataset.append([store_id, portal_id, review_text, score, str(date)[0:10]])
 
-                    # rate
-                    star_score = driver.find_element(By.XPATH,
-                                                     f'//*[@id="pane"]/div/div[1]/div/div/div[2]/div[9]/div[{idx}]/div/div[3]/div[3]/div[1]/span[2]')
-                    star_score = star_score.get_attribute('aria-label')  # 구글 별점은 text 형식이 아니여서 속성값을 불러옴
-
-                    # save as list
-                    data.append([i + 1, 1002, user_id, review_txt, int(star_score[4])])
-
-                    # print(data)
         except:
             print('end of docs')
+            break
+
+# save as csv (store info)
+info_df = pd.DataFrame(store_info_dataset, columns=['store_id', 'website', 'g_link'])
+info_df.to_csv('google_info_15.csv')
+print('info saved')
 
 
-    except Exception as e1:
-        print('No info')
-        data.append([i+1, 1002, 'No info', 'No info', 'No info'])
+# save as csv (review)
+review_df = pd.DataFrame(review_dataset, columns=['store_id', 'portal_id', 'review', 'score', 'date'])
+review_df.to_csv('google_review_15.csv')
+print('review saved')
 
-driver.quit()
-print(data)
-
-# save as csv
-review_df = pd.DataFrame(data, columns=['store_id', 'portal_id', 'user_id', 'review', 'score'])
-review_df.to_csv('reviews.csv')
-print('dataframe saved')
