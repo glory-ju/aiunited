@@ -22,7 +22,7 @@ import pandas as pd
 import time
 import numpy as np
 
-df = pd.read_csv('storeInfo_1.csv')
+df = pd.read_csv('../data/storeInfo_1.csv')
 
 data_frame = []
 
