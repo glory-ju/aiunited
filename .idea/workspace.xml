@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="83426d46-65d4-4a78-963d-8a66d35467bb" name="Default Changelist" comment="2021-10-29 naver crawling">
+    <list default="true" id="83426d46-65d4-4a78-963d-8a66d35467bb" name="Default Changelist" comment="2021.11.11">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/aiunited.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/aiunited.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sourcecode/211029_store_info.py" beforeDir="false" afterPath="$PROJECT_DIR$/sourcecode/211029_store_info.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,9 +37,15 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="settings.editor.selected.configurable" value="configurable.group.build" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/test2.py" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
-  <component name="RunManager" selected="Python.211029_store_info">
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\hy949\PycharmProjects\aiunited\data" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.test_test">
     <configuration name="211029_store_info" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -60,20 +68,20 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="memo" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="Unnamed" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <module name="aiunited" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
-      <option name="SDK_HOME" value="C:\Users\quzmi\miniconda3\python.exe" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/sourcecode" />
-      <option name="IS_MODULE_SDK" value="false" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/sourcecode/memo.py" />
+      <option name="SCRIPT_NAME" value="" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -104,15 +112,62 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="test2" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="aiunited" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\hy949\PycharmProjects\aiunited\venv\Scripts\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test2.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="test_test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="aiunited" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test_test.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <list>
-      <item itemvalue="Python.naver_scraping" />
-      <item itemvalue="Python.memo" />
+      <item itemvalue="Python.Unnamed" />
       <item itemvalue="Python.211029_store_info" />
+      <item itemvalue="Python.test2" />
+      <item itemvalue="Python.naver_scraping" />
+      <item itemvalue="Python.test_test" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.test_test" />
+        <item itemvalue="Python.test2" />
         <item itemvalue="Python.211029_store_info" />
-        <item itemvalue="Python.memo" />
         <item itemvalue="Python.naver_scraping" />
       </list>
     </recent_temporary>
@@ -126,6 +181,13 @@
       <option name="presentableId" value="Default" />
       <updated>1634892288995</updated>
       <workItem from="1634892307276" duration="1771000" />
+      <workItem from="1635579645957" duration="956000" />
+      <workItem from="1635580985193" duration="6155000" />
+      <workItem from="1635615225707" duration="41000" />
+      <workItem from="1635615283198" duration="1375000" />
+      <workItem from="1635686360546" duration="7953000" />
+      <workItem from="1635962542472" duration="3214000" />
+      <workItem from="1636558475639" duration="320000" />
     </task>
     <task id="LOCAL-00001" summary="~$store_info.csv bye">
       <created>1635341731526</created>
@@ -155,7 +217,21 @@
       <option name="project" value="LOCAL" />
       <updated>1635516869733</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="2021-10-29 naver crawling">
+      <created>1635957063981</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1635957063981</updated>
+    </task>
+    <task id="LOCAL-00006" summary="11/04 siksin - info crawling">
+      <created>1635964367823</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1635964367823</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -178,16 +254,19 @@
     <MESSAGE value="~$store_info.csv" />
     <MESSAGE value="~$store_info.csv bye" />
     <MESSAGE value="2021-10-29 naver crawling" />
-    <option name="LAST_COMMIT_MESSAGE" value="2021-10-29 naver crawling" />
+    <MESSAGE value="11/04 siksin - info crawling" />
+    <option name="LAST_COMMIT_MESSAGE" value="11/04 siksin - info crawling" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/aiunited$naver_scraping.coverage" NAME="naver_scraping Coverage Results" MODIFIED="1635352256224" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$USER_HOME$/Documents/카카오톡 받은 파일" />
-    <SUITE FILE_PATH="coverage/aiunited$211027_naver_crawling.coverage" NAME="211027_naver_crawling Coverage Results" MODIFIED="1635400103435" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/sourcecode" />
-    <SUITE FILE_PATH="coverage/aiunited$211025_naver.coverage" NAME="211025_naver Coverage Results" MODIFIED="1635336780572" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/sourcecode" />
     <SUITE FILE_PATH="coverage/aiunited$memo.coverage" NAME="memo Coverage Results" MODIFIED="1635506824299" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/sourcecode" />
-    <SUITE FILE_PATH="coverage/aiunited$211028_store_info.coverage" NAME="211029_store_info Coverage Results" MODIFIED="1635525280585" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/sourcecode" />
     <SUITE FILE_PATH="coverage/aiunited$211028.coverage" NAME="211028 Coverage Results" MODIFIED="1635353581897" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/sourcecode" />
+    <SUITE FILE_PATH="coverage/aiunited$211025_naver.coverage" NAME="211025_naver Coverage Results" MODIFIED="1635336780572" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/sourcecode" />
+    <SUITE FILE_PATH="coverage/aiunited$211028_store_info.coverage" NAME="211029_store_info Coverage Results" MODIFIED="1635525280585" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/sourcecode" />
+    <SUITE FILE_PATH="coverage/aiunited$211027_naver_crawling.coverage" NAME="211027_naver_crawling Coverage Results" MODIFIED="1635400103435" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/sourcecode" />
     <SUITE FILE_PATH="coverage/aiunited$28_practice.coverage" NAME="28_practice Coverage Results" MODIFIED="1635407502497" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/sourcecode" />
     <SUITE FILE_PATH="coverage/aiunited$211028_store_info__1_.coverage" NAME="211028_store_info (1) Coverage Results" MODIFIED="1635426320217" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/sourcecode" />
+    <SUITE FILE_PATH="coverage/aiunited$test_test.coverage" NAME="test_test Coverage Results" MODIFIED="1635749557057" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/aiunited$test2.coverage" NAME="test2 Coverage Results" MODIFIED="1635588613375" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
