@@ -10,10 +10,9 @@ df = pd.read_csv('C:/Users/quzmi/PycharmProjects/aiunited/data/naver_storeInfo_1
 
 data_frame = []
 
-for idx in range(5370, 6000):
+for idx in range(38, 1000):
 
     time.sleep(np.random.randint(0, 3))
-    # time.sleep(3)
 
     headers = {
         'authority': 'pcmap-api.place.naver.com',
@@ -57,14 +56,13 @@ for idx in range(5370, 6000):
 
     try:
         for page in range(1, iter_cnt):
-            # time.sleep(np.random.randint(2, 4))
+            print('---'*30)
             data = '[{"operationName":"getVisitorReviews","variables":{"input":{"businessId":"' + businessid + '","businessType":"restaurant","item":"0","bookingBusinessId":null,"page":' + str(page) + ',"display":'+display+',"isPhotoUsed":false,"includeContent":true,"getAuthorInfo":true}},"query":"query getVisitorReviews($input: VisitorReviewsInput) {\\n  visitorReviews(input: $input) {\\n    items {\\n      id\\n      rating\\n      author {\\n        id\\n        nickname\\n        from\\n        imageUrl\\n        objectId\\n        url\\n        review {\\n          totalCount\\n          imageCount\\n          avgRating\\n          __typename\\n        }\\n        theme {\\n          totalCount\\n          __typename\\n        }\\n        __typename\\n      }\\n      body\\n      thumbnail\\n      media {\\n        type\\n        thumbnail\\n        __typename\\n      }\\n      tags\\n      status\\n      visitCount\\n      viewCount\\n      visited\\n      created\\n      reply {\\n        editUrl\\n        body\\n        editedBy\\n        created\\n        replyTitle\\n        __typename\\n      }\\n      originType\\n      item {\\n        name\\n        code\\n        options\\n        __typename\\n      }\\n      language\\n      highlightOffsets\\n      apolloCacheId\\n      translatedText\\n      businessName\\n      showBookingItemName\\n      showBookingItemOptions\\n      bookingItemName\\n      bookingItemOptions\\n      votedKeywords {\\n        code\\n        displayName\\n        __typename\\n      }\\n      userIdno\\n      isFollowing\\n      followerCount\\n      followRequested\\n      loginIdno\\n      __typename\\n    }\\n    starDistribution {\\n      score\\n      count\\n      __typename\\n    }\\n    hideProductSelectBox\\n    total\\n    __typename\\n  }\\n}\\n"},{"operationName":"getVisitorReviews","variables":{"id":"11718339"},"query":"query getVisitorReviews($id: String) {\\n  visitorReviewStats(input: {businessId: $id}) {\\n    id\\n    name\\n    review {\\n      avgRating\\n      totalCount\\n      scores {\\n        count\\n        score\\n        __typename\\n      }\\n      starDistribution {\\n        count\\n        score\\n        __typename\\n      }\\n      imageReviewCount\\n      authorCount\\n      maxSingleReviewScoreCount\\n      maxScoreWithMaxCount\\n      __typename\\n    }\\n    analysis {\\n      themes {\\n        code\\n        label\\n        count\\n        __typename\\n      }\\n      menus {\\n        label\\n        count\\n        __typename\\n      }\\n      votedKeyword {\\n        totalCount\\n        reviewCount\\n        userCount\\n        details {\\n          category\\n          code\\n          displayName\\n          count\\n          previousRank\\n          __typename\\n        }\\n        __typename\\n      }\\n      __typename\\n    }\\n    visitorReviewsTotal\\n    ratingReviewsTotal\\n    __typename\\n  }\\n  visitorReviewThemes(input: {businessId: $id}) {\\n    themeLists {\\n      name\\n      key\\n      __typename\\n    }\\n    __typename\\n  }\\n}\\n"},{"operationName":"getVisitorReviewPhotosInVisitorReviewTab","variables":{"businessId":"11718339","businessType":"restaurant","item":"0","page":1,"display":10},"query":"query getVisitorReviewPhotosInVisitorReviewTab($businessId: String!, $businessType: String, $page: Int, $display: Int, $theme: String, $item: String) {\\n  visitorReviews(input: {businessId: $businessId, businessType: $businessType, page: $page, display: $display, theme: $theme, item: $item, isPhotoUsed: true}) {\\n    items {\\n      id\\n      rating\\n      author {\\n        id\\n        nickname\\n        from\\n        imageUrl\\n        objectId\\n        url\\n        __typename\\n      }\\n      body\\n      thumbnail\\n      media {\\n        type\\n        thumbnail\\n        __typename\\n      }\\n      tags\\n      status\\n      visited\\n      originType\\n      item {\\n        name\\n        code\\n        options\\n        __typename\\n      }\\n      businessName\\n      __typename\\n    }\\n    starDistribution {\\n      score\\n      count\\n      __typename\\n    }\\n    hideProductSelectBox\\n    total\\n    __typename\\n  }\\n}\\n"},{"operationName":"getVisitorRatingReviews","variables":{"input":{"businessId":"11718339","businessType":"restaurant","item":"0","bookingBusinessId":null,"page":1,"display":10,"includeContent":false,"getAuthorInfo":true},"id":"11718339"},"query":"query getVisitorRatingReviews($input: VisitorReviewsInput) {\\n  visitorReviews(input: $input) {\\n    total\\n    items {\\n      id\\n      rating\\n      author {\\n        id\\n        nickname\\n        from\\n        imageUrl\\n        objectId\\n        url\\n        review {\\n          totalCount\\n          imageCount\\n          avgRating\\n          __typename\\n        }\\n        theme {\\n          totalCount\\n          __typename\\n        }\\n        __typename\\n      }\\n      visitCount\\n      visited\\n      originType\\n      reply {\\n        editUrl\\n        body\\n        editedBy\\n        created\\n        replyTitle\\n        __typename\\n      }\\n      votedKeywords {\\n        code\\n        displayName\\n        __typename\\n      }\\n      businessName\\n      status\\n      userIdno\\n      isFollowing\\n      followerCount\\n      followRequested\\n      loginIdno\\n      __typename\\n    }\\n    __typename\\n  }\\n}\\n"}]'
             response = requests.post('https://pcmap-api.place.naver.com/graphql', headers=headers, data=data)
 
             response_json = json.loads(response.text)
             response_json = response_json[0]['data']['visitorReviews']['items']
 
-            # time.sleep(np.random.randint(0, 2))
 
             for index, i in enumerate(response_json):
                 date = i['visited']
@@ -76,7 +74,7 @@ for idx in range(5370, 6000):
                     date_time = datetime.date(int('2021'), int(date_slicing[0]), int(date_slicing[1]))
                 score = i['rating']
                 review = i['body'].replace('\n', '').replace('.','')
-                data_frame.append([idx + 1, 1004, date_time, score, review])
+                data_frame.append([df['store_id'][idx], 1004, date_time, score, review])
 
                 print(index, date_time)
                 print(score)
@@ -90,4 +88,4 @@ for idx in range(5370, 6000):
 
 
     dataset = pd.DataFrame(data_frame, columns=['store_id', 'portal_id', 'date', 'score', 'review'])
-    dataset.to_csv('sample_naver_review_5371.csv', encoding='UTF-8', index=False)
+    dataset.to_csv('naver_1000_1.csv', encoding='UTF-8', index=False)
