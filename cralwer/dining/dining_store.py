@@ -1,7 +1,7 @@
 import numpy as np
 import requests
 from bs4 import BeautifulSoup as bs
-import dining_review as dining_review
+import dining_review
 import pandas as pd
 
 '''
@@ -112,8 +112,8 @@ def find_store_and_get_review_and_info(store_id, store_name, find_addr, df, what
     @ info
         
 '''
-
 def get_store_info(store_id, store_code, df):
+    # 데이터프레임 인덱스 설정
 
     column_list = ['region', 'store_name', 'store_x', 'store_y', 'store_addr', 'store_addr_new', 'store_tel',	'open_hours', 'website', 's_link', 'd_link']
     headers = {
@@ -153,52 +153,40 @@ def get_store_info(store_id, store_code, df):
     # 행 리턴
     return row_df
 
-if __name__ == '__main__':
 
-    # review test code
-    # csv 파일 데이터프레임화
-    df = pd.read_csv('data/store_info_dining.csv', encoding='UTF-8')
-
-    # 결과 데이터 프레임
-    column_list = ['store_id', 'portal_id', 'date', 'score', 'review']
-    store_review = pd.DataFrame(columns=column_list)
+'''
+    @ Author : seunghyo
+    @ method : dining_code store_info 크롤링 실행부
+    @ parameter : 
+        1 df = 사전에 조사한 store_info.csv to 데이터프레임
+'''
+def action_dining_store_info(df):
+    # index 재설정
+    df.set_index('store_id', inplace=True)
     idx = 0
-    # 검색이름, 주소 리스트화시켜 loop 진입
-    for store_code, store_id in zip(df['d_link'].tolist(), df['store_id'].tolist()):
-        if not pd.isna(store_code):
-            store_review = dining_review.get_review(store_id, store_code, store_review)
-        print(idx)
-        idx += 1
-    # csv 파일변환
-    store_review.to_csv('diningcode_review1.csv', encoding='UTF-8', index=False)
 
-    # # 2. store_info test code
-    # # csv 파일 데이터프레임화
-    # df = pd.read_csv('data/storeInfo_1.csv', encoding='UTF-8')
-    # df.set_index('store_id', inplace=True)
-    # idx = 0
-    #
-    # # column 딕셔너리 추가
-    # column_dict = {}
-    # for idx, column in enumerate(df):
-    #     column_dict[column] = idx
-    #
-    # df['d_link'] = ''
-    # for index, row in zip(df.index.tolist(), df.values.tolist()):
-    #     # store_name. id, addr 추출
-    #     store_name = row[column_dict['store_name']]
-    #     store_addr = row[column_dict['store_addr']]
-    #     store_id = index
-    #     # 상세주소 미스매치를 줄이기 위한 전처리
-    #     addr_str_list = store_addr.split(' ')
-    #
-    #     # 주소 잘못된 곳이 많아 동까지만 같은지 검색
-    #     find_addr = ' '.join(addr_str_list[:3])
-    #     try:
-    #         make_df = find_store_and_get_review_and_info(store_id, store_name, find_addr, row, 'info').iloc[0]
-    #         df.loc[store_id] = make_df
-    #     except:
-    #         pass
-    #     idx += 1
-    #     print(idx)
-    # df.to_csv('data/store_info_dining.csv', encoding='UTF-8')
+    # column 딕셔너리 추가
+    column_dict = {}
+    for idx, column in enumerate(df):
+        column_dict[column] = idx
+
+    df['d_link'] = ''
+    for index, row in zip(df.index.tolist(), df.values.tolist()):
+        # store_name. id, addr 추출
+        store_name = row[column_dict['store_name']]
+        store_addr = row[column_dict['store_addr']]
+        store_id = index
+        # 상세주소 미스매치를 줄이기 위한 전처리
+        addr_str_list = store_addr.split(' ')
+
+        # 주소 잘못된 곳이 많아 동까지만 같은지 검색
+        find_addr = ' '.join(addr_str_list[:3])
+        try:
+            make_df = find_store_and_get_review_and_info(store_id, store_name, find_addr, row, 'info').iloc[0]
+            df.loc[store_id] = make_df
+        except:
+            pass
+        idx += 1
+        print(idx)
+    df.to_csv('data/store_info_dining.csv', encoding='UTF-8')
+    return df
