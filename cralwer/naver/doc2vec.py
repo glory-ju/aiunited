@@ -68,3 +68,25 @@ print('Similar Document {}: «{}»\n'.format(sim_id, ' '.join(tagged_data[sim_id
 
 # for i, (word, similarity) in enumerate(model.dv.most_similar(positive=['맛', '단골'], topn=5)):
 #     print(f'{i}번째 유사 단어: {word} \t 유사도 : {similarity}')
+
+def vectors(document_list):
+    document_embedding_list = []
+
+    for line in document_list:
+        doc2vec = None
+        count = 0
+        for word in line.split():
+            if word in model.dv.vocab:
+                count += 1
+                if doc2vec is None:
+                    doc2vec = model[word]
+                else:
+                    doc2vec = doc2vec + model[word]
+        if doc2vec is not None:
+            doc2vec = doc2vec / count
+            document_embedding_list.append(doc2vec)
+
+    return document_embedding_list
+
+document_embedding_list = vectors(df['preprocessed_reivew'])
+print('문서 벡터의 수 : ', len(document_embedding_list))
