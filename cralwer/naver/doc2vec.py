@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from konlpy.tag import Mecab
 import pandas as pd
 
@@ -28,14 +29,14 @@ tagged_data = [TaggedDocument(words=uid, tags=[_d]) for uid, _d in tokenized]
 
 max_epochs = 10
 
-model = Doc2Vec(tagged_data, window=4, vector_size=100, alpha=0.025, min_alpha=0.025, min_count=2, epochs = 40, dm=1, negative=5, seed=9999)
+model = Doc2Vec(tagged_data, window=4, vector_size=100, alpha=0.025, min_alpha=0.025, min_count=20, epochs = 40, dm=1, negative=5, seed=9999)
 # model = Doc2Vec(window=4, vector_size=50, alpha=0.025, min_alpha=0.025, min_count=2, epochs = 40)
 
 print(model.dv.vectors.shape)
 model.build_vocab(tagged_data)
 
 for epoch in range(max_epochs):
-    print('Iteration {0}'.format(epoch))
+    print('Iteration {0} model updating...'.format(epoch))
     model.train(tagged_data, total_examples = model.corpus_count, epochs=model.epochs)
     model.alpha -= 0.002
     model.min_alpha = model.alpha
@@ -57,7 +58,7 @@ for doc_id in range(len(tagged_data)):
 
 import random
 doc_id = random.randint(0, len(tagged_data)-1)
-inferred_vector = model.infer_vector(['너무', '맛있어요'])
+inferred_vector = model.infer_vector(['고기', '맛집'])
 sims = model.dv.most_similar([inferred_vector], topn=len(model.dv))
 
 print(inferred_vector)
@@ -69,24 +70,24 @@ print('Similar Document {}: «{}»\n'.format(sim_id, ' '.join(tagged_data[sim_id
 # for i, (word, similarity) in enumerate(model.dv.most_similar(positive=['맛', '단골'], topn=5)):
 #     print(f'{i}번째 유사 단어: {word} \t 유사도 : {similarity}')
 
-def vectors(document_list):
-    document_embedding_list = []
-
-    for line in document_list:
-        doc2vec = None
-        count = 0
-        for word in line.split():
-            if word in model.dv.vocab:
-                count += 1
-                if doc2vec is None:
-                    doc2vec = model[word]
-                else:
-                    doc2vec = doc2vec + model[word]
-        if doc2vec is not None:
-            doc2vec = doc2vec / count
-            document_embedding_list.append(doc2vec)
-
-    return document_embedding_list
-
-document_embedding_list = vectors(df['preprocessed_reivew'])
-print('문서 벡터의 수 : ', len(document_embedding_list))
+# def vectors(document_list):
+#     document_embedding_list = []
+#
+#     for line in document_list:
+#         doc2vec = None
+#         count = 0
+#         for word in line.split():
+#             if word in model.dv.vocab:
+#                 count += 1
+#                 if doc2vec is None:
+#                     doc2vec = model[word]
+#                 else:
+#                     doc2vec = doc2vec + model[word]
+#         if doc2vec is not None:
+#             doc2vec = doc2vec / count
+#             document_embedding_list.append(doc2vec)
+#
+#     return document_embedding_list
+#
+# document_embedding_list = vectors(df['preprocessed_reivew'].fillna(''))
+# print('문서 벡터의 수 : ', len(document_embedding_list))
