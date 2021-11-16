@@ -44,6 +44,7 @@ second_ranks = []
 for doc_id in range(len(tagged_data)):
     inferred_vector = model.infer_vector(tagged_data[doc_id].words)
     sims = model.dv.most_similar([inferred_vector], topn=len(model.dv))
+    print(sims[1])
     second_ranks.append(sims[1])
 
 import random
