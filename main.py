@@ -4,7 +4,8 @@ from cralwer.dining.dining_store import action_dining_store_info
 from cralwer.naver.naver_crawling import action_naver_store_info
 from cralwer.dining.dining_review import action_dining_review_crwaler
 from cralwer.naver.review_crawler import action_naver_review_crawler
-
+from cralwer.google.google_store import action_google_store_info
+from cralwer.google.google_review import action_google_review_crawler
 
 if __name__ == '__main__':
     # 최초 storeinfo csv 가져오기
@@ -17,7 +18,9 @@ if __name__ == '__main__':
 
     # naver get store_info
     store_info_naver = action_naver_store_info(df)
+
     # google get store_info
+    store_info_google = action_google_store_info(df)
 
     # combine store_info
 
@@ -29,7 +32,9 @@ if __name__ == '__main__':
 
     # naver review Crawling
     naver_review = action_naver_review_crawler(store_info_naver)
+
     # google review crawling
+    google_review = action_google_review_crawler(store_info_google)
 
     # combine review
 
