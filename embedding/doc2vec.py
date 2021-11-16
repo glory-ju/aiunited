@@ -30,7 +30,6 @@ tagged_data = [TaggedDocument(words=uid, tags=[_d]) for uid, _d in tokenized]
 max_epochs = 10
 
 model = Doc2Vec(tagged_data, window=4, vector_size=100, alpha=0.025, min_alpha=0.025, min_count=20, epochs = 40, dm=1, negative=5, seed=9999)
-# model = Doc2Vec(window=4, vector_size=50, alpha=0.025, min_alpha=0.025, min_count=2, epochs = 40)
 
 print(model.dv.vectors.shape)
 model.build_vocab(tagged_data)
@@ -40,14 +39,6 @@ for epoch in range(max_epochs):
     model.train(tagged_data, total_examples = model.corpus_count, epochs=model.epochs)
     model.alpha -= 0.002
     model.min_alpha = model.alpha
-
-# for text, tags in tokenized:
-#     trained_doc_vec = model.docvecs[tags[0]]
-#     inferred_doc_vec = model.infer_vector(text)
-#     print(f'tags: {tags}, text: {text}')
-#     print(f'trained_doc_vec: {trained_doc_vec}')
-#     print(f'inferred_doc_vec: {inferred_doc_vec}')
-#     print('----'*20)
 
 ranks = []
 second_ranks = []
@@ -66,28 +57,3 @@ print(sims)
 print('Train Document ({}): <{}>\n'.format(doc_id, ' '.join(tagged_data[doc_id].words)))
 sim_id = second_ranks[doc_id]
 print('Similar Document {}: «{}»\n'.format(sim_id, ' '.join(tagged_data[sim_id[0]].words)))
-
-# for i, (word, similarity) in enumerate(model.dv.most_similar(positive=['맛', '단골'], topn=5)):
-#     print(f'{i}번째 유사 단어: {word} \t 유사도 : {similarity}')
-
-# def vectors(document_list):
-#     document_embedding_list = []
-#
-#     for line in document_list:
-#         doc2vec = None
-#         count = 0
-#         for word in line.split():
-#             if word in model.dv.vocab:
-#                 count += 1
-#                 if doc2vec is None:
-#                     doc2vec = model[word]
-#                 else:
-#                     doc2vec = doc2vec + model[word]
-#         if doc2vec is not None:
-#             doc2vec = doc2vec / count
-#             document_embedding_list.append(doc2vec)
-#
-#     return document_embedding_list
-#
-# document_embedding_list = vectors(df['preprocessed_reivew'].fillna(''))
-# print('문서 벡터의 수 : ', len(document_embedding_list))
