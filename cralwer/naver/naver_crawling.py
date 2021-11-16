@@ -16,62 +16,75 @@ def to_csv(i, idx):
     dataset = pd.DataFrame(data_frame, columns=['store_id', 'region', 'store_name', 'store_x', 'store_y', 'store_addr', 'store_addr_new', 'store_tel', 'open_hours', 'n_link', 'website'])
     dataset.to_csv('naver_storeInfo.csv', encoding='UTF-8', index=False)
 
-import requests
-import json
-import pandas as pd
-import time
-import numpy as np
+def action_naver_store_info(df):
 
-df = pd.read_csv('storeInfo_1.csv')
+    import requests
+    import json
+    import pandas as pd
+    import time
+    import numpy as np
 
-data_frame = []
+    df = pd.read_csv('../data/storeInfo_1.csv')
 
-for i in range(len(df)):
-    time.sleep(np.random.randint(0, 2))
-    df['new_name'] = df['store_name'][i] + ' ' + df['store_addr'][i][:12]
-    new_name = df['new_name'][i]
+    data_frame = []
 
-    headers = {
-               'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36',
-               'cookie': 'NNB=YYF7WTTONT7GA; NID_AUT=6XDDHNp+RcKAoZR4X6WEGoEfGvfj/yinwhkuRt1FzzhwIWk1O2ghLoG+HBCOEkOf; NID_JKL=CcQOovGLIQDJuVb+/+nCI5UhKmVJKR84vJlqN/fIt9o=; _ga=GA1.2.878040348.1627623526; ASID=dc5f3dbd0000017bc9a08e5f0000005a; NV_WETR_LOCATION_RGN_M="MDUyMDA2MjQ="; NV_WETR_LAST_ACCESS_RGN_M="MDUyMDA2MjQ="; m_loc=568796a9a798b031c79ce34c474a916b745a603ef49a3efae027330981851c165c45d208eb010b902a04b8027ba06bef; NFS=2; MM_NEW=1; BMR=s=1635143616649&r=https%3A%2F%2Fm.blog.naver.com%2FPostView.naver%3FisHttpsRedirect%3Dtrue%26blogId%3Dmck0903%26logNo%3D221442957432&r2=https%3A%2F%2Fwww.google.com%2F; page_uid=hUpiasp0JywssLOingosssssthC-510028; NID_SES=AAABpbD2qjHEUIH3pWB4k7ykWkstFCWkjxSXmzGoQA6z5h2HqI5xJKRYWq3L1In+Id8MLlQkomzzt4MoE26CuvOcQ4xaL12x6Xj6jbavekPWZhilepZfZkmlLJDpHI1mxWu3QJPFb4dltRh4ZuFMNpsy149f2enHKaQv5VxOwUaunoEz4A6/VHB8lAlR3US2J1bdWvnhx0YcjtTGPJwYad32ygfxSxNDwLI57+StZkeTh+hXyTQPDadd5fo7FS7g6RwHf3Xo999b8ub9F43Z9u0Ua+5D9+qxdvZReRVdNVRsR45CvAG/poMR2XAw0bj8vSgHh5dx62dFZKB763UKFPTm+l8/APzys2yvohX/nbjbALdv43XO/nQVoSjjpBYrfTni4jG5OvjFkPCqJAFP6kNhsrqGOFnc7BSDlAvSrnutBgLwrnUvDFn4Lnbdou3Vxx3m9KUflIpitWBxqHCYg7c4iAl7rVsn9b7iZm8HRa/GxG8JiXIZ7iJZ+zlBunEM2nQRgGN0kkjWwawfZFynjVqkcGVM02fxavo4jr9Z0AkMcGs+EzYdJmEHTxv9NzE4QHY9gA==; csrf_token=0462579b6db64a53558dd357d5d0f718c775ca6ca9ee0a51f671bfc170779510819d3335dabf0700e10fd6a8a79b8a5ccff05683e8c47095049a248ab522e86a; page_uid=f332993b-0836-4b3c-86a2-821516a4cc7b',
-               }
+    for i in range(len(df)):
+        time.sleep(np.random.randint(0, 2))
+        df['new_name'] = df['store_name'][i] + ' ' + df['store_addr'][i][:12]
+        new_name = df['new_name'][i]
 
-    params = (
-                ('query', new_name),
-                ('page', '1'),
-                ('displayCount', '20'),
-            )
-    response = requests.get('https://map.naver.com/v5/api/search', headers=headers, params=params)
-    load = json.loads(response.text)
+        headers = {
+                   'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36',
+                   'cookie': 'NNB=YYF7WTTONT7GA; NID_AUT=6XDDHNp+RcKAoZR4X6WEGoEfGvfj/yinwhkuRt1FzzhwIWk1O2ghLoG+HBCOEkOf; NID_JKL=CcQOovGLIQDJuVb+/+nCI5UhKmVJKR84vJlqN/fIt9o=; _ga=GA1.2.878040348.1627623526; ASID=dc5f3dbd0000017bc9a08e5f0000005a; NV_WETR_LOCATION_RGN_M="MDUyMDA2MjQ="; NV_WETR_LAST_ACCESS_RGN_M="MDUyMDA2MjQ="; m_loc=568796a9a798b031c79ce34c474a916b745a603ef49a3efae027330981851c165c45d208eb010b902a04b8027ba06bef; NFS=2; MM_NEW=1; BMR=s=1635143616649&r=https%3A%2F%2Fm.blog.naver.com%2FPostView.naver%3FisHttpsRedirect%3Dtrue%26blogId%3Dmck0903%26logNo%3D221442957432&r2=https%3A%2F%2Fwww.google.com%2F; page_uid=hUpiasp0JywssLOingosssssthC-510028; NID_SES=AAABpbD2qjHEUIH3pWB4k7ykWkstFCWkjxSXmzGoQA6z5h2HqI5xJKRYWq3L1In+Id8MLlQkomzzt4MoE26CuvOcQ4xaL12x6Xj6jbavekPWZhilepZfZkmlLJDpHI1mxWu3QJPFb4dltRh4ZuFMNpsy149f2enHKaQv5VxOwUaunoEz4A6/VHB8lAlR3US2J1bdWvnhx0YcjtTGPJwYad32ygfxSxNDwLI57+StZkeTh+hXyTQPDadd5fo7FS7g6RwHf3Xo999b8ub9F43Z9u0Ua+5D9+qxdvZReRVdNVRsR45CvAG/poMR2XAw0bj8vSgHh5dx62dFZKB763UKFPTm+l8/APzys2yvohX/nbjbALdv43XO/nQVoSjjpBYrfTni4jG5OvjFkPCqJAFP6kNhsrqGOFnc7BSDlAvSrnutBgLwrnUvDFn4Lnbdou3Vxx3m9KUflIpitWBxqHCYg7c4iAl7rVsn9b7iZm8HRa/GxG8JiXIZ7iJZ+zlBunEM2nQRgGN0kkjWwawfZFynjVqkcGVM02fxavo4jr9Z0AkMcGs+EzYdJmEHTxv9NzE4QHY9gA==; csrf_token=0462579b6db64a53558dd357d5d0f718c775ca6ca9ee0a51f671bfc170779510819d3335dabf0700e10fd6a8a79b8a5ccff05683e8c47095049a248ab522e86a; page_uid=f332993b-0836-4b3c-86a2-821516a4cc7b',
+                   }
 
-    try:
+        params = (
+                    ('query', new_name),
+                    ('page', '1'),
+                    ('displayCount', '20'),
+                )
+        response = requests.get('https://map.naver.com/v5/api/search', headers=headers, params=params)
+        load = json.loads(response.text)
+
         try:
             try:
-                # storeInfo_1.csv 상의 주소가 siksin에서 크롤링한 주소임
-                # 네이버, 구글상 주소와 다른 곳이 많음
-                # 따라서 '경기도 연천군 연천읍' 까지 1차 슬라이싱
+                try:
+                    # storeInfo_1.csv 상의 주소가 siksin에서 크롤링한 주소임
+                    # 네이버, 구글상 주소와 다른 곳이 많음
+                    # 따라서 '경기도 연천군 연천읍' 까지 1차 슬라이싱
 
-                csv_addr = df['store_addr'][i][:12]
+                    csv_addr = df['store_addr'][i][:12]
 
-                for idx in range(len(load['result']['place']['list'])):
-                    store_addr = load['result']['place']['list'][idx]['address'][:12]
+                    for idx in range(len(load['result']['place']['list'])):
+                        store_addr = load['result']['place']['list'][idx]['address'][:12]
 
-                    if store_addr == csv_addr:
-                        to_csv(i, idx)
-                        break
-                    # 주소가 가지각색이라 조건문 추가
-                    elif store_addr[:15] == csv_addr[:15]:
-                        to_csv(i, idx)
-                        break
-                    elif store_addr[:7] == csv_addr[:7]:
-                        to_csv(i, idx)
-                        break
-                    elif store_addr[:10] == csv_addr[:10]:
-                        to_csv(i, idx)
-                        break
-            # 식당 이름 + 주소 전체로 입력값
+                        if store_addr == csv_addr:
+                            to_csv(i, idx)
+                            break
+                        # 주소가 가지각색이라 조건문 추가
+                        elif store_addr[:15] == csv_addr[:15]:
+                            to_csv(i, idx)
+                            break
+                        elif store_addr[:7] == csv_addr[:7]:
+                            to_csv(i, idx)
+                            break
+                        elif store_addr[:10] == csv_addr[:10]:
+                            to_csv(i, idx)
+                            break
+                # 식당 이름 + 주소 전체로 입력값
+                except:
+                    new_name = df['store_name'][i] + ' ' + df['store_addr'][i]
+                    params = (
+                        ('query', new_name),
+                        ('page', '1'),
+                        ('displayCount', '20'),
+                    )
+                    response = requests.get('https://map.naver.com/v5/api/search', headers=headers, params=params)
+                    load = json.loads(response.text)
+                    to_csv(i, idx)
+            # 송학원한방삼계탕누룽지백숙 -> 송하원 누룽지 한방 백숙
             except:
-                new_name = df['store_name'][i] + ' ' + df['store_addr'][i]
+                new_name = df['store_name'][i][:8]
                 params = (
                     ('query', new_name),
                     ('page', '1'),
@@ -79,33 +92,22 @@ for i in range(len(df)):
                 )
                 response = requests.get('https://map.naver.com/v5/api/search', headers=headers, params=params)
                 load = json.loads(response.text)
-                to_csv(i, idx)
-        # 송학원한방삼계탕누룽지백숙 -> 송하원 누룽지 한방 백숙을 위한 except
+
+                csv_addr = df['store_addr'][i][:12]
+                web_name = df['store_name'][i] + ' ' + df['store_addr'][i]
+
+                for idx in range(len(load['result']['place']['list'])):
+                    store_addr = load['result']['place']['list'][idx]['address'][:12]
+
+
+                    if store_addr == csv_addr:
+                        to_csv(i, idx)
+                        break
+                    elif store_addr[:15] == csv_addr[:15]:
+                        to_csv(i, idx)
+                        break
         except:
-            new_name = df['store_name'][i][:8]
-            params = (
-                ('query', new_name),
-                ('page', '1'),
-                ('displayCount', '20'),
-            )
-            response = requests.get('https://map.naver.com/v5/api/search', headers=headers, params=params)
-            load = json.loads(response.text)
-
-            csv_addr = df['store_addr'][i][:12]
-            web_name = df['store_name'][i] + ' ' + df['store_addr'][i]
-
-            for idx in range(len(load['result']['place']['list'])):
-                store_addr = load['result']['place']['list'][idx]['address'][:12]
-
-
-                if store_addr == csv_addr:
-                    to_csv(i, idx)
-                    break
-                elif store_addr[:15] == csv_addr[:15]:
-                    to_csv(i, idx)
-                    break
-    except:
-        data_frame.append('')
+            data_frame.append('')
 
 
 
