@@ -8,8 +8,8 @@ from sklearn.decomposition import PCA
 import matplotlib as mpl
 from gensim.models import KeyedVectors
 
-train_data = pd.read_csv('C:/Users/hy949/PycharmProjects/aiunited/data/siksin_pre.csv', encoding='utf-8')
-# train_data = df[:1000][:]
+df = pd.read_csv('C:/Users/hy949/PycharmProjects/aiunited/data/siksin_pre.csv', encoding='utf-8')
+train_data = df[:100][:]
 # train_data = df.loc[:]['preprocessed_review']
 print(train_data)
 
@@ -27,20 +27,23 @@ for sentence in train_data['preprocessed_review']:
     temp_X = okt.morphs(sentence, stem=True) # 토큰화
     temp_X = [word for word in temp_X if not word in stopwords] # 불용어 제거
     tokenized_data.append(temp_X)
-
+print(len(tokenized_data))
+print(tokenized_data)
+scores = list(train_data['score'])
+print(scores)
 # 모델 생성
-model = Word2Vec(sentences = tokenized_data, window = 5, min_count = 5, workers = 4, sg = 0, vector_size = 100)
+# model = Word2Vec(sentences = tokenized_data, window = 5, min_count = 5, workers = 4, sg = 0, size = 100)
 # , size = 100
 # 완성된 임베딩 매트릭스의 크기 확인
-print(model.wv.vectors.shape)
-print(model.wv.most_similar("맛"))
+# print(model.wv.vectors.shape)
+# print(model.wv.most_similar("맛"))
 
 # 그래프 폰트 문제 처리
 mpl.rcParams['axes.unicode_minus'] = False
-plt.rc('font', family='D2Coding')
+plt.rc('font', family='Malgun Gothic')
 
 # 차원 축소 (TSNE)
-def show_tsne():
+def show_tsne(X_show):
     tsne = TSNE(n_components=2)
     X = tsne.fit_transform(X_show)
 
@@ -58,7 +61,7 @@ def show_tsne():
     plt.show()
 
 # 차원 축소 (PCA)
-def show_pca():
+def show_pca(X_show):
     pca = PCA(n_components=2)
     pca.fit(X_show)
 
@@ -76,13 +79,31 @@ def show_pca():
     plt.show()
 
 
+model = Word2Vec(tokenized_data, size=300, window=3, min_count=1, workers=1)
+
+
 vocab = list(model.wv.vocab)
+print(vocab)
+print(len(vocab))
 X = model[vocab]
+
 
 # sz개의 단어에 대해서만 시각화
 sz = 1000
 X_show = X[:1000, :]
 vocab_show = vocab[:sz]
 
-show_tsne()
-show_pca()
+show_tsne(X_show)
+show_pca(X_show)
+
+avg_vector = []
+for i in tokenized_data:
+    for token in i:
+        vectors = []
+        vectors.append(model.wv[token])
+    avg_vector.append(sum(vectors)/len(vectors))
+print(len(avg_vector))
+# print(avg_vector)
+
+
+
