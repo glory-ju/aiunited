@@ -19,11 +19,11 @@ scores = list(train_data['score'])
 text = list(train_data['review'])
 
 # 불용어 정의
-stopwords = ['의','가','이','은','들','는','좀','잘','걍','과','도','를','으로','자','에','와','한','하다', '을', '를']
 
 
 # 형태소 분석기 OKT를 사용한 토큰화 작업 (다소 시간 소요)
 def tokenize_okt(train_data):
+    stopwords = ['의', '가', '이', '은', '들', '는', '좀', '잘', '걍', '과', '도', '를', '으로', '자', '에', '와', '한', '하다', '을', '를']
     okt = Okt()
     tokenized_data = []
     for sentence in train_data['preprocessed_review']:
