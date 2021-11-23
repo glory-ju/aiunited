@@ -340,7 +340,10 @@ def get_features(model, words, size):
     return feature_vector
 
 def load_doc2vec(df, **param):
-    tokenized_review = df['preprocessing_review']
+    from preprocessing_example.ko_preprocessing import morpheme
+    preprocessing_review = zip(df['preprocessing_review'].tolist()[:10000], df['score'].tolist()[:10000])
+    tokenized_review = morpheme(preprocessing_review)
+
     lenth_token = len(tokenized_review)
     # model_name = my_doc2vec_model
     model = Doc2Vec.load(param['model_name'])
