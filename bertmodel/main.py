@@ -18,7 +18,7 @@ from transformers.optimization import get_cosine_schedule_with_warmup
 
 def main():
     # GPU settings
-    device = torch.device("cpu")
+    device = torch.device("cuda:0")
 
     # model settings
     # bertmodel, vocab = get_pytorch_kobert_model()
@@ -30,21 +30,29 @@ def main():
     bertmodel, vocab = get_kobert_model('skt/kobert-base-v1', tokenizer.vocab_file)
 
     # data load
-    DATA = pd.read_csv('google_review.csv')
+    DATA = pd.read_csv('final_dec_review.csv')
 
     DATA = DATA.dropna()
 
     data_list = []
-    for q, label in zip(DATA['preprocessed_review'], DATA['score']):
+    for q, label in zip(DATA['review'], DATA['score']):
         data = []
         data.append(q)
         data.append(str(int(label)))
 
         data_list.append(data)
 
-    data_list = data_list[:10000]
+    # data_list = data_list[:500000]
 
-    print(data_list)
+    return device, data_list, bertmodel, vocab
+
+
+
+
+
+
+if __name__ == '__main__':
+    device, data_list, bertmodel, vocab = main()
 
     # train & test split
     from sklearn.model_selection import train_test_split
@@ -71,7 +79,7 @@ def main():
     max_len = 64
     batch_size = 4
     warmup_ratio = 0.1
-    num_epochs = 5
+    num_epochs = 3
     max_grad_norm = 1
     log_interval = 200
     learning_rate = 5e-5
@@ -173,7 +181,7 @@ def main():
             test_acc += calc_accuracy(out, label)
         print("epoch {} test acc {}".format(e + 1, test_acc / (batch_id + 1)))
 
-    # torch.save(model, 'model.pth')
+    torch.save(model, 'model.pt')
 
-if __name__ == '__main__':
-    main()
+# model = torch.load('model.pt')
+# model.eval()
