@@ -1,7 +1,7 @@
 import numpy as np
 import requests
 from bs4 import BeautifulSoup as bs
-import dining_review
+from cralwer.dining import dining_review
 import pandas as pd
 
 '''
