@@ -25,7 +25,7 @@ def main():
     from KoBERT.kobert_hf.kobert_tokenizer import KoBERTTokenizer
 
     tokenizer = KoBERTTokenizer.from_pretrained('skt/kobert-base-v1')
-    tokenizer.encode("한국어 모델을 공유합니다.")
+    # tokenizer.encode("한국어 모델을 공유합니다.")
 
     bertmodel, vocab = get_kobert_model('skt/kobert-base-v1', tokenizer.vocab_file)
 
@@ -42,14 +42,9 @@ def main():
 
         data_list.append(data)
 
-    # data_list = data_list[:500000]
+    # data_list = data_list[:1000]
 
     return device, data_list, bertmodel, vocab
-
-
-
-
-
 
 if __name__ == '__main__':
     device, data_list, bertmodel, vocab = main()
@@ -181,7 +176,12 @@ if __name__ == '__main__':
             test_acc += calc_accuracy(out, label)
         print("epoch {} test acc {}".format(e + 1, test_acc / (batch_id + 1)))
 
-    torch.save(model, 'model.pt')
+    torch.save(model.state_dict(), 'model_for_inference.pt')
 
-# model = torch.load('model.pt')
-# model.eval()
+    # end = 1
+    # while end == 1:
+    #     sentence = input("하고싶은 말을 입력해주세요 : ")
+    #     if sentence == 0:
+    #         break
+    #     predict(sentence)
+    #     print("\n")
