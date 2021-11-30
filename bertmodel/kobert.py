@@ -16,7 +16,7 @@ from KoBERT.kobert.pytorch_kobert import get_pytorch_kobert_model, get_kobert_mo
 from transformers import AdamW
 from transformers.optimization import get_cosine_schedule_with_warmup
 
-def main():
+def dataload():
     # GPU settings
     device = torch.device("cuda:0")
 
@@ -25,7 +25,7 @@ def main():
     from KoBERT.kobert_hf.kobert_tokenizer import KoBERTTokenizer
 
     tokenizer = KoBERTTokenizer.from_pretrained('skt/kobert-base-v1')
-    tokenizer.encode("한국어 모델을 공유합니다.")
+    # tokenizer.encode("한국어 모델을 공유합니다.")
 
     bertmodel, vocab = get_kobert_model('skt/kobert-base-v1', tokenizer.vocab_file)
 
@@ -42,38 +42,18 @@ def main():
 
         data_list.append(data)
 
-    # data_list = data_list[:500000]
+    # data_list = data_list[:1000]
 
     return device, data_list, bertmodel, vocab
 
-
-
-
-
-
-if __name__ == '__main__':
     device, data_list, bertmodel, vocab = main()
 
-    # train & test split
+def kobert_train_test(device, data_list, bertmodel, vocab):
+        # train & test split
     from sklearn.model_selection import train_test_split
 
     dataset_train, dataset_test = train_test_split(data_list, test_size=0.25, random_state=0)
 
-    # BERT model for Dataset settings
-    class BERTDataset(Dataset):
-        def __init__(self, dataset, sent_idx, label_idx, bert_tokenizer, max_len,
-                     pad, pair):
-            transform = nlp.data.BERTSentenceTransform(
-                bert_tokenizer, max_seq_length=max_len, pad=pad, pair=pair)
-
-            self.sentences = [transform([i[sent_idx]]) for i in dataset]
-            self.labels = [np.int32(i[label_idx]) for i in dataset]
-
-        def __getitem__(self, i):
-            return (self.sentences[i] + (self.labels[i],))
-
-        def __len__(self):
-            return (len(self.labels))
 
     # Setting parameters
     max_len = 64
@@ -95,44 +75,11 @@ if __name__ == '__main__':
     train_dataloader = torch.utils.data.DataLoader(data_train, batch_size=batch_size)
     test_dataloader = torch.utils.data.DataLoader(data_test, batch_size=batch_size)
 
-    # init model
-    class BERTClassifier(nn.Module):
-        def __init__(self,
-                     bert,
-                     hidden_size=768,
-                     num_classes=6,  # output classes
-                     dr_rate=None,
-                     params=None):
-            super(BERTClassifier, self).__init__()
-            self.bert = bert
-            self.dr_rate = dr_rate
-
-            self.classifier = nn.Linear(hidden_size, num_classes)
-            if dr_rate:
-                self.dropout = nn.Dropout(p=dr_rate)
-
-        def gen_attention_mask(self, token_ids, valid_length):
-            attention_mask = torch.zeros_like(token_ids)
-            for i, v in enumerate(valid_length):
-                attention_mask[i][:v] = 1
-            return attention_mask.float()
-
-        def forward(self, token_ids, valid_length, segment_ids):
-            attention_mask = self.gen_attention_mask(token_ids, valid_length)
-
-            _, pooler = self.bert(input_ids=token_ids, token_type_ids=segment_ids.long(),
-                                  attention_mask=attention_mask.float().to(token_ids.device), return_dict=False)
-            if self.dr_rate:
-                out = self.dropout(pooler)
-            return self.classifier(out)
-
-    model = BERTClassifier(bertmodel, dr_rate=0.5).to(device)
-
     # Prepare optimizer and schedule (linear warmup and decay)
     no_decay = ['bias', 'LayerNorm.weight']
     optimizer_grouped_parameters = [
         {'params': [p for n, p in model.named_parameters() if not any(nd in n for nd in no_decay)],
-         'weight_decay': 0.01},
+        'weight_decay': 0.01},
         {'params': [p for n, p in model.named_parameters() if any(nd in n for nd in no_decay)], 'weight_decay': 0.0}
     ]
 
@@ -168,7 +115,7 @@ if __name__ == '__main__':
             train_acc += calc_accuracy(out, label)
             if batch_id % log_interval == 0:
                 print("epoch {} batch id {} loss {} train acc {}".format(e + 1, batch_id + 1, loss.data.cpu().numpy(),
-                                                                         train_acc / (batch_id + 1)))
+                                                                        train_acc / (batch_id + 1)))
         print("epoch {} train acc {}".format(e + 1, train_acc / (batch_id + 1)))
 
         model.eval()
@@ -181,7 +128,14 @@ if __name__ == '__main__':
             test_acc += calc_accuracy(out, label)
         print("epoch {} test acc {}".format(e + 1, test_acc / (batch_id + 1)))
 
-    torch.save(model, 'model.pt')
+    torch.save(model.state_dict(), 'model_for_inference.pt')
 
-# model = torch.load('model.pt')
-# model.eval()
+    
+
+    # end = 1
+    # while end == 1:
+    #     sentence = input("하고싶은 말을 입력해주세요 : ")
+    #     if sentence == 0:
+    #         break
+    #     predict(sentence)
+    #     print("\n")
