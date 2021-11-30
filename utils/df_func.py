@@ -37,7 +37,24 @@ def data_sorting(df1, df2, df3, df4):
     return sorted_data_list
 
 # 다이닝코드, 구글, 네이버, 식신에서 크롤링한 리뷰데이터를 한 df로 합치기
-def merge_data_to_csv(diningcode_df, google_df, naver_df, siksin_df):
+def merge_review_data(diningcode_df, google_df, naver_df, siksin_df):
     all_data_df = pd.concat(data_sorting(diningcode_df, google_df, naver_df, siksin_df))
 
     return all_data_df
+
+'''
+    @ Author : seunghyo
+    @ method : 크롤링한 store_info 각 url column 병합 메서드
+    @ parameter : 각 크롤링한 Store_info df
+    @ return : merge df
+'''
+def merge_store_info_url(dining=None, google=None, naver=None, siksin=None):
+
+    try:
+        dining['g_link'] =google['g_link']
+        dining['n_link'] = naver['n_link']
+        dining['s_link'] = siksin['s_link']
+    except Exception as e:
+        print('에러 발생 , ', e)
+
+    return dining
