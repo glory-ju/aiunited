@@ -16,6 +16,7 @@ from KoBERT.kobert.pytorch_kobert import get_pytorch_kobert_model, get_kobert_mo
 from transformers import AdamW
 from transformers.optimization import get_cosine_schedule_with_warmup
 
+#
 def dataload():
     # GPU settings
     device = torch.device("cuda:0")
