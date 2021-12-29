@@ -5,7 +5,7 @@ import datetime
 import re
 
 # csv 파일 읽기
-df = pd.read_csv('data/store_info.csv', encoding='utf-8')
+df = pd.read_csv('data/store_info.csv', encoding='euc-kr')
 
 # header 저장
 # 'siksinoauth' 갱신 필요함
